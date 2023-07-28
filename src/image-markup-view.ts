@@ -1,17 +1,20 @@
-import {ItemView, WorkspaceLeaf} from "obsidian";
+import {ItemView, Plugin, TAbstractFile, WorkspaceLeaf} from "obsidian";
+import ImageMarkupPlugin from "./main";
 
 export const IMAGE_MARKUP_VIEW_TYPE = "image-markup-view";
 
-export default class ImageMarkupModal extends ItemView {
-	fileName: string;
+export default class ImageMarkupView extends ItemView {
+	private plugin: ImageMarkupPlugin;
+  private file: TAbstractFile;
 
-	constructor(leaf: WorkspaceLeaf, fileName: string) {
+	constructor(leaf: WorkspaceLeaf, plugin: ImageMarkupPlugin, file: TAbstractFile) {
 		super(leaf);
-		this.fileName = fileName;
+		this.plugin = plugin;
+    this.file = file;
 	}
 
 	getDisplayText(): string {
-		return this.fileName;
+		return this.file.name;
 	}
 
 	getViewType(): string {
